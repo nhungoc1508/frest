@@ -1,0 +1,48 @@
+<% layout('layouts/boilerplate') %>
+    <div class="container justify-content-center align-items-center my-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">User profile</h2>
+                        <ul>
+                            <li>Username: <%=user.username%></li>
+                            <li>Email: <%=user.email%></li>
+                            <li>Name: <%=user.name%></li>
+                            <li>Addresses: <%=user.addresses%></li>
+                            <li>Phone: <%=user.phone%></li>
+                            <li>Role: <%=user.role%></li>
+                            <li>Cart: total <%=user.total%>
+                                <ul>
+                                    <% for (let item of user.cart) { %> 
+                                    <li><%=item.product.name%> - Price: <%=item.product.price%> - Qty: <%=item.qty%></li>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <form class="d-inline" action="/profile?product=<%=item.product._id%>" method="POST">
+                                                <button class="btn btn-danger">Remove from cart</button>
+                                            </form>
+                                        </div>
+                                        <div class="col-6">
+                                            <form class="d-inline" action="/profile?product=<%=item.product._id%>" method="POST">
+                                                <input type="number" name="qty" id="qty" value="<%=item.qty%>">
+                                                <button class="btn btn-info">Update qty</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <% } %> 
+                                </ul>
+                            </li>
+                            <li>Order history: <%=user.orders.length%>
+                                <ul>
+                                    <% for (let order of user.orders) { %>
+                                    <li><%=order.total%></li>
+                                    <% } %> 
+                                </ul>
+                            </li>
+                        </ul>
+                        <a href="/checkout">Check out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

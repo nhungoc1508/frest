@@ -1,0 +1,28 @@
+<% layout('layouts/boilerplate') %>
+<h1><%= product.name %></h1>
+<% if (product.image) { %> 
+<img src="<%=product.image.url%>" alt="" class="img-thumbnail">
+<% } %> 
+<ul>
+    <li>Price: <%= product.price %></li>
+    <li>Category: <%= product.category %></li>
+    <li>Stock: <%= product.stock %></li>
+    <li>Discount: <%= product.discount * 100 %>%</li>
+</ul>
+<form class="d-inline" action="/products/<%=product._id%>" method="POST">
+    <input type="number" name="qty" id="qty" value="1">
+    <button class="btn btn-info">Add to cart</button>
+</form>
+<% if (currentUser) { %>
+<% if (currentUser.role === 'admin') { %> 
+<form class="d-inline" action="/products/<%=product._id%>?_method=DELETE" method="POST">
+    <button class="btn btn-danger">Delete</button>
+</form>
+<div>
+    <a href="/products/<%=product._id%>/edit">Edit product</a>
+</div>
+<% } %>
+<% } %>
+<div>
+    <a href="/products">Back to index</a>
+</div>

@@ -1,0 +1,25 @@
+<% layout('layouts/boilerplate') %>
+<h1>Manage products</h1>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Category</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Discount</th>
+            <!-- <th scope="col">Update</th> -->
+        </tr>
+    </thead>
+    <tbody>
+        <% for (let product of products) { %>
+        <tr id="<%=product._id%>" class="<%=product.stock >= 10 ? '' : 'table-danger'%>">
+            <td class="text-capitalize"><%=product.category%></td>
+            <td><%=product.name%></td>
+            <td><%=product.price%></td>
+            <td><%=product.stock%></td>
+            <td><%=product.discount%>%</td>
+        </tr>
+        <% } %>
+    </tbody>
+</table>

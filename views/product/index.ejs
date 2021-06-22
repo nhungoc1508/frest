@@ -1,0 +1,10 @@
+<% layout('layouts/boilerplate') %>
+<h1>All products</h1>
+<ul>
+    <% for (let product of products) { %>
+    <li><%= product.name %> - <%= product.category %> - Price: <%= product.price %> - <a href="/products/<%=product._id%>">See details</a></li>
+    <form class="d-inline" action="/products/<%=product._id%>" method="POST">
+        <button class="btn btn-info">Add to cart</button>
+    </form>
+    <% } %>
+</ul>

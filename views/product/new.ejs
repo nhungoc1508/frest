@@ -1,0 +1,29 @@
+<% layout('layouts/boilerplate') %>
+<h1>New product</h1>
+<form action="/products" method="POST">
+    <div>
+        <label for="name">Product name</label>
+        <input type="text" name="product[name]" id="name">
+    </div>
+    <div>
+        <label for="price">Product price</label>
+        <input type="number" name="product[price]" id="price">
+    </div>
+    <div>
+        <label for="stock">Available stock</label>
+        <input type="number" name="product[stock]" id="stock" value="100">
+    </div>
+    <div>
+        <label for="category">Product category</label>
+        <select name="product[category]" id="category">
+            <option value="beverages">Beverages</option>
+            <option value="dairy">Dairy</option>
+            <option value="desserts">Desserts</option>
+            <option value="dry goods">Dry goods</option>
+            <option value="fruits">Fruits</option>
+            <option value="vegetables">Vegetables</option>
+            <option value="meat">Meat</option>
+        </select>
+    </div>
+    <button>Add product</button>
+</form>

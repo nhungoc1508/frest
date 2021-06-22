@@ -1,0 +1,16 @@
+<% layout('layouts/boilerplate') %> 
+<h1>Check out</h1>
+<h2>Order:</h2>
+<ul>
+    <% for (let item of user.cart) { %> 
+    <li><%=item.product.name%> - Price: <%=item.product.price%> - Qty: <%=item.qty%></li>
+    <% } %> 
+</ul>
+<h2>Total: <%=user.total%></h2>
+<h2>Information:</h2>
+<p>Address(es):</p>
+<ul>
+    <% for (let add of user.addresses) { %> 
+    <li><%= add %> </li>
+    <% } %>
+</ul>

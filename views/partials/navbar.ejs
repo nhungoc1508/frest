@@ -1,0 +1,28 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Frest</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" href="/">Home</a>
+                <a class="nav-link" href="/products">All products</a>
+                <% if (currentUser) { %>
+                <% if (currentUser.role === 'admin') { %>
+                <a class="nav-link" href="/products/new">New product</a>
+                <% } %>
+                <% } %>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <% if (!currentUser) { %>
+                    <a class="nav-link" href="/login">Log in</a>
+                    <a class="nav-link" href="/register">Register</a>
+                <% } else { %>
+                    <a class="nav-link" href="/profile">Hello, <%= currentUser.username %>!</a>
+                    <a class="nav-link" href="/logout">Log out</a>
+                <% } %> 
+            </div>
+    </div>
+</nav>
