@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
 
+const AddressSchema = new Schema({
+    street: String,
+    city: String
+});
+
 const UserSchema = new Schema({
     email: {
         type: String,
@@ -16,10 +21,7 @@ const UserSchema = new Schema({
             type: String,
         }
     },
-    addresses: [{
-        street: String,
-        city: String
-    }],
+    addresses: [AddressSchema],
     phone: Number,
     role: {
         type: String,

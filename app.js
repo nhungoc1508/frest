@@ -227,6 +227,10 @@ app.get('/checkout', async (req, res) => {
     res.render('user/checkout', { user })
 })
 
+app.post('/checkout', (req, res) => {
+    res.send(req.body)
+})
+
 app.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/products')

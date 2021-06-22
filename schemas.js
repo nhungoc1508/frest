@@ -30,7 +30,7 @@ module.exports.userSchema = Joi.object({
             firstName: Joi.string().escapeHTML(),
             lastName: Joi.string().escapeHTML()
         }),
-        addresses: Joi.array(),
+        // addresses: Joi.array(),
         phone: Joi.number()
     }).required()
 });

@@ -11,10 +11,16 @@ const OrderSchema = new Schema({
     address: {
         type: String // add required
     },
-    products: [
+    cart: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'Product'
+            product: {
+                type: Schema.Types.ObjectId,
+                ref: 'Product'
+            },
+            qty: {
+                type: Number,
+                default: 1
+            }
         }
     ],
     total: {

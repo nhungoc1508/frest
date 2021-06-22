@@ -9,8 +9,14 @@
 <h2>Total: <%=user.total%></h2>
 <h2>Information:</h2>
 <p>Address(es):</p>
-<ul>
-    <% for (let add of user.addresses) { %> 
-    <li><%= add %> </li>
-    <% } %>
-</ul>
+<form action="/checkout" method="POST">
+    <% user.addresses.forEach((add, i) => { %>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="address" id="<%=add._id%>" value="<%=add._id%>" <%= i===0 ? 'checked' : ''%>>
+        <label class="form-check-label" for="address">
+            <%=add.street%>, <%=add.city%>
+        </label>
+    </div>
+    <% }) %>
+    <button class="btn btn-info">Submit</button>
+</form>
