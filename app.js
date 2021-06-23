@@ -300,7 +300,8 @@ app.put('/info', async (req, res) => {
 
 app.get('/manage/products', isLoggedIn, isAdmin, async (req, res) => {
     const products = await Product.find({});
-    res.render('admin/manage-products', { products })
+    const categories = ['beverages', 'dairy', 'desserts', 'dry goods', 'fruits', 'vegetables', 'meat'];
+    res.render('admin/manage-products', { products, categories })
 })
 
 app.post('/manage/products', isLoggedIn, isAdmin, async (req, res) => {

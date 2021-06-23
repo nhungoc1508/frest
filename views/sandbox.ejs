@@ -1,87 +1,124 @@
-<% layout('layouts/boilerplate') %> 
-<h1>Sandbox</h1>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Col 1</th>
-            <th scope="col">Col 2</th>
-            <th scope="col">Col 3</th>
-            <th scope="col">Button</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr id="firstRow">
-            <td>
-                <input type="text" name="" id="one" class="form-control" value="One" readonly>
-            </td>
-            <td>
-                <input type="text" name="" id="" class="form-control" value="Two" readonly>
-            </td>
-            <td>
-                <input type="text" name="" id="" class="form-control" value="Three" readonly>
-            </td>
-            <td>
-                <button type="button" class="btn btn-secondary" id="editOne"><i class="fas fa-edit"></i></button>
-            </td>
-        </tr>
-        <tr>
-            <td>One</td>
-            <td>Two</td>
-            <td>Three</td>
-            <td>Four</td>
-        </tr>
-    </tbody>
-</table>
 <% layout('layouts/boilerplate') %>
-<h1>Manage orders</h1>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Username</th>
-            <th scope="col">Cart</th>
-            <th scope="col">Total</th>
-            <th scope="col">Status</th>
-            <th scope="col">Button</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% for (let order of orders) { %>
-        <tr id="<%=order._id%>">
-            <td>
-                <input type="text" name="" id="" class="form-control" value="<%=order.customer.username%>" readonly>
-            </td>
-            <td>
-                <input type="text" name="" id="" class="form-control" value="<%=order.cart.length%>" readonly>
-            </td>
-            <td>
-                <input type="text" name="" id="" class="form-control" value="<%=order.total%>" readonly>
-            </td>
-            <td>
-                <input type="text" name="" id="" class="form-control" value="<%=order.status%>" readonly>
-            </td>
-            <td>
-                <button type="button" class="btn btn-secondary" id="edit<%=order._id%>"><i class="fas fa-edit"></i></button>
-            </td>
-        </tr>
-        <% } %> 
-    </tbody>
-</table>
+    <h1>Sandbox</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Col 1</th>
+                <th scope="col">Col 2</th>
+                <th scope="col">Col 3</th>
+                <th scope="col">Button</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="firstRow">
+                <td>
+                    <input type="text" name="" id="one" class="form-control" value="One" readonly>
+                </td>
+                <td>
+                    <input type="text" name="" id="" class="form-control" value="Two" readonly>
+                </td>
+                <td>
+                    <input type="text" name="" id="" class="form-control" value="Three" readonly>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-secondary" id="editOne"><i class="fas fa-edit"></i></button>
+                </td>
+            </tr>
+            <tr>
+                <td>One</td>
+                <td>Two</td>
+                <td>Three</td>
+                <td>Four</td>
+            </tr>
+        </tbody>
+    </table>
+    <% layout('layouts/boilerplate') %>
+        <h1>Manage orders</h1>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Cart</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Button</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let order of orders) { %>
+                    <tr id="<%=order._id%>">
+                        <td>
+                            <input type="text" name="" id="" class="form-control" value="<%=order.customer.username%>"
+                                readonly>
+                        </td>
+                        <td>
+                            <input type="text" name="" id="" class="form-control" value="<%=order.cart.length%>"
+                                readonly>
+                        </td>
+                        <td>
+                            <input type="text" name="" id="" class="form-control" value="<%=order.total%>" readonly>
+                        </td>
+                        <td>
+                            <input type="text" name="" id="" class="form-control" value="<%=order.status%>" readonly>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary" id="edit<%=order._id%>"><i
+                                    class="fas fa-edit"></i></button>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+        <div class="my-5">
+            <ul class="nav nav-tabs nav-fill justify-content-center" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                        type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                        type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                        type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">Lorem ipsum
+                    dolor sit amet consectetur, adipisicing elit. Voluptatum eum eos facere, saepe eveniet expedita
+                    obcaecati fugiat, voluptas rem inventore fugit repellendus nam consequuntur quas molestias ipsam
+                    cumque
+                    praesentium dolorum!</div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Lorem ipsum dolor
+                    sit
+                    amet consectetur adipisicing elit. Dolore saepe doloremque maxime omnis unde ex neque vero
+                    similique.
+                    Sequi fugit animi neque ipsum distinctio nobis esse sed culpa explicabo beatae.</div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Lorem ipsum dolor
+                    sit
+                    amet, consectetur adipisicing elit. Consequuntur commodi impedit culpa dolorum blanditiis. Cum
+                    officia
+                    possimus eius quae, suscipit necessitatibus ratione quas velit laudantium maiores aliquid nesciunt
+                    voluptates alias!</div>
+            </div>
+        </div>
 
-<script>
-    // const id = '<%-orders[0]._id%>';
-    const orders = <%-JSON.stringify(orders)%>;
-    for (let order of orders) {
-        const id = order._id;
-        console.log(id);
-        const button = document.getElementById(`edit${id}`);
-        const row = document.getElementById(id);
-        button.addEventListener('click', function() {
-            for (let i = 0; i < row.children.length; i++) {
-                const child = row.children[i];
-                if (child.tagName == "TD") {
-                    child.children[0].toggleAttribute('readonly');
-                }
+        <script>
+            // const id = '<%-orders[0]._id%>';
+            const orders = <% -JSON.stringify(orders) %>;
+            for (let order of orders) {
+                const id = order._id;
+                console.log(id);
+                const button = document.getElementById(`edit${id}`);
+                const row = document.getElementById(id);
+                button.addEventListener('click', function () {
+                    for (let i = 0; i < row.children.length; i++) {
+                        const child = row.children[i];
+                        if (child.tagName == "TD") {
+                            child.children[0].toggleAttribute('readonly');
+                        }
+                    }
+                })
             }
-        })
-    }
-</script>
+        </script>
