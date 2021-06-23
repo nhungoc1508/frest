@@ -15,6 +15,7 @@ const MongoStore = require('connect-mongo');
 
 const Product = require('./models/product');
 const User = require('./models/user');
+const Order = require('./models/order');
 const { isLoggedIn, isLoggedOut, validateProduct, isAdmin } = require('./middleware');
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/frest';
@@ -188,12 +189,13 @@ app.post('/register', isLoggedOut, async (req, res) => {
 })
 
 app.get('/profile', isLoggedIn, async (req, res) => {
-    const user = await User.findById(req.user._id).populate({
+    const user = await User.findById(req.user._id).populate('orders').populate({
         path: 'cart',
         populate: {
             path: 'product'
         }
     });
+    
     res.render('user/profile', { user })
 })
 
@@ -227,8 +229,31 @@ app.get('/checkout', async (req, res) => {
     res.render('user/checkout', { user })
 })
 
-app.post('/checkout', (req, res) => {
-    res.send(req.body)
+app.post('/checkout', async (req, res) => {
+    const { address } = req.body;
+    const user = await User.findById(req.user._id).populate({
+        path: 'cart',
+        populate: {
+            path: 'product'
+        }
+    });
+    // Without populating, user.total is NaN
+    const addressIndex = user.addresses.findIndex(add => add._id == address);
+    const addressObj = user.addresses[addressIndex];
+    const order = new Order({
+        customer: user,
+        address: addressObj,
+        cart: user.cart,
+        total: user.total
+    });
+    await order.save();
+    user.orders.push(order);
+    while (user.cart.length > 0) {
+        user.cart.pop();
+    }
+    await user.save();
+    req.flash('success', 'Successfully placed an order!');
+    res.redirect('/profile')
 })
 
 app.get('/logout', (req, res) => {

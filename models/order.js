@@ -9,7 +9,8 @@ const OrderSchema = new Schema({
         ref: 'User' // add required
     },
     address: {
-        type: String // add required
+        type: Schema.Types.ObjectId,
+        ref: 'Address' // add required
     },
     cart: [
         {
@@ -28,14 +29,16 @@ const OrderSchema = new Schema({
         min: 0
     },
     dateStart: {
-        type: Date
+        type: Date,
+        default: Date.now
     },
     dateEnd: {
         type: Date
     },
     status: {
         type: String,
-        enum: ['Pending', 'Packaging', 'Shipping', 'Delivered', 'Cancelled']
+        enum: ['Pending', 'Packaging', 'Shipping', 'Delivered', 'Cancelled'],
+        default: 'Pending'
     }
 });
 
