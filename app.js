@@ -139,12 +139,14 @@ app.put('/products/:id', isLoggedIn, isAdmin, async (req, res) => {
     const { id } = req.params;
     const product = await Product.findByIdAndUpdate(id, { ...req.body.product }, { new: true });
     await product.save();
+    req.flash('success', 'Successfully updated product!');
     res.redirect(`/products/${product._id}`)
 })
 
 app.delete('/products/:id', isLoggedIn, isAdmin, async (req, res) => {
     const { id } = req.params;
     await Product.findByIdAndDelete(id);
+    req.flash('success', 'Successfully deleted product!')
     res.redirect('/products')
 })
 
@@ -261,6 +263,19 @@ app.get('/logout', (req, res) => {
     res.redirect('/products')
 })
 
+app.get('/sandbox', isLoggedIn, isAdmin, async (req, res) => {
+    const orders = await Order.find()
+        .populate('customer')
+        // .populate('address') // rejected promise error
+        .populate({
+            path: 'cart',
+            populate: {
+                path: 'product'
+            }
+        });
+    res.render('sandbox', { orders })
+})
+
 app.get('/info', (req, res) => {
     res.render('user/information')
 })
@@ -286,6 +301,15 @@ app.put('/info', async (req, res) => {
 app.get('/manage/products', isLoggedIn, isAdmin, async (req, res) => {
     const products = await Product.find({});
     res.render('admin/manage-products', { products })
+})
+
+app.post('/manage/products', isLoggedIn, isAdmin, async (req, res) => {
+    const productId = req.query.product;
+    // console.log(req.body.product);
+    const { name, price, stock, discount } = req.body.product;
+    const product = await Product.findByIdAndUpdate(productId, { name, price, stock, discount });
+    await product.save();
+    res.redirect(`/manage/products/#${productId}`)
 })
 
 app.get('/manage/customers', isLoggedIn, isAdmin, async (req, res) => {
