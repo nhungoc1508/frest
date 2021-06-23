@@ -195,7 +195,7 @@ app.get('/profile', isLoggedIn, async (req, res) => {
             path: 'product'
         }
     });
-    
+
     res.render('user/profile', { user })
 })
 
@@ -266,9 +266,18 @@ app.get('/info', (req, res) => {
 })
 
 app.put('/info', async (req, res) => {
-    const { email, firstName, lastName, phone } = req.body;
+    const { email, firstName, lastName, phone, street, city } = req.body;
     const id = res.locals.currentUser._id;
-    const user = await User.findByIdAndUpdate(id, { email, name: { firstName, lastName }, phone}, { new: true });
+    const user = await User.findByIdAndUpdate(id, {
+        email,
+        name: { firstName, lastName },
+        phone
+    },
+        { new: true });
+    if (street, city) {
+        user.addresses.push({ street, city });
+    }
+    // console.log(user.addresses);
     await user.save();
     req.flash('success', 'Successfully updated information!');
     res.redirect('/info')
@@ -280,8 +289,21 @@ app.get('/manage/products', isLoggedIn, isAdmin, async (req, res) => {
 })
 
 app.get('/manage/customers', isLoggedIn, isAdmin, async (req, res) => {
-    const customers = await User.find({role: {$ne: 'admin'}})
+    const customers = await User.find({ role: { $ne: 'admin' } })
     res.render('admin/manage-customers', { customers })
+})
+
+app.get('/manage/orders', isLoggedIn, isAdmin, async (req, res) => {
+    const orders = await Order.find()
+        .populate('customer')
+        // .populate('address') // rejected promise error
+        .populate({
+            path: 'cart',
+            populate: {
+                path: 'product'
+            }
+        });
+    res.render('admin/manage-orders', { orders })
 })
 
 app.get('/search', (req, res) => {

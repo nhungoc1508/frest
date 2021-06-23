@@ -1,0 +1,26 @@
+<% layout('layouts/boilerplate') %>
+<h1>Manage orders</h1>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Cart</th>
+            <th scope="col">Total</th>
+            <th scope="col">Start</th>
+            <th scope="col">End</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for (let order of orders) { %>
+        <tr id="<%=order._id%>">
+            <td><%=order.customer.username%></td>
+            <td><%=order.cart.length%></td>
+            <td><%=order.total%></td>
+            <td><%=order.dateStart%></td>
+            <td><%=order.dateEnd%></td>
+            <td><%=order.status%></td>
+        </tr>
+        <% } %> 
+    </tbody>
+</table>

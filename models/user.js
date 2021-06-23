@@ -10,7 +10,7 @@ const AddressSchema = new Schema({
 const UserSchema = new Schema({
     email: {
         type: String,
-        required: true,
+        // required: true,
         unique: true
     },
     name: {
@@ -62,4 +62,5 @@ UserSchema.virtual('total').get(function () {
 
 UserSchema.plugin(passportLocalMongoose);
 
+// module.exports = mongoose.model('Address', AddressSchema);
 module.exports = mongoose.model('User', UserSchema);

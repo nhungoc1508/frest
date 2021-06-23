@@ -25,7 +25,7 @@ const Joi = BaseJoi.extend(extension);
 
 module.exports.userSchema = Joi.object({
     user: Joi.object({
-        email: Joi.string().required().escapeHTML(),
+        email: Joi.string().escapeHTML(),
         name: Joi.object({
             firstName: Joi.string().escapeHTML(),
             lastName: Joi.string().escapeHTML()

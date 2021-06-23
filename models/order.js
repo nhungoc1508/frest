@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Product = require('./product');
-const User = require('./product');
+const User = require('./user');
 
 const OrderSchema = new Schema({
     customer: {
@@ -40,6 +40,10 @@ const OrderSchema = new Schema({
         enum: ['Pending', 'Packaging', 'Shipping', 'Delivered', 'Cancelled'],
         default: 'Pending'
     }
+});
+
+OrderSchema.virtual('fullAddress').get(function () {
+    return this.address.street;
 });
 
 module.exports = mongoose.model('Order', OrderSchema);
