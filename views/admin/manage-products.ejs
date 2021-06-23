@@ -19,14 +19,16 @@
                         <th scope="col">Price</th>
                         <th scope="col">Stock</th>
                         <th scope="col">Discount (%)</th>
+                        <th scope="col">See details</th>
                         <th scope="col">Quick edit</th>
                         <th scope="col">Save</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% for (let product of products) { %>
                         <% if (product.category == category) {%>
-                        <form action="/manage/products?product=<%=product._id%>" method="POST">
+                        <form action="/manage/products?product=<%=product._id%>&_method=PUT" method="POST">
                             <tr id="<%=product._id%>" class="<%=product.stock >= 10 ? '' : 'table-danger'%>">
                                 <td class="text-capitalize"><%=product.category%></td>
                                 <td>
@@ -42,13 +44,22 @@
                                     <input type="number" name="product[discount]" class="form-control" value="<%=product.discount%>" readonly required>
                                 </td>
                                 <td>
+                                    <a href="/products/<%=product._id%>">Details</a>
+                                </td>
+                                <td>
                                     <button type="button" class="btn btn-secondary" id="edit<%=product._id%>"><i class="fas fa-edit"></i></button>
                                 </td>
                                 <td>
                                     <button class="btn btn-info"><i class="fas fa-save"></i></button>
                                 </td>
+                            </form>
+                                <td>
+                                    <form action="/manage/products?product=<%=product._id%>&_method=DELETE" method="POST">
+                                        <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </td>
                             </tr>
-                        </form>
+                        <!-- </form> -->
                         <% } %>
                     <% } %>
                 </tbody>

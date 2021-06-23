@@ -304,13 +304,23 @@ app.get('/manage/products', isLoggedIn, isAdmin, async (req, res) => {
     res.render('admin/manage-products', { products, categories })
 })
 
-app.post('/manage/products', isLoggedIn, isAdmin, async (req, res) => {
+app.put('/manage/products', isLoggedIn, isAdmin, async (req, res) => {
     const productId = req.query.product;
     // console.log(req.body.product);
     const { name, price, stock, discount } = req.body.product;
-    const product = await Product.findByIdAndUpdate(productId, { name, price, stock, discount });
+    const product = await Product.findByIdAndUpdate(productId, { name, price, stock, discount }, { new: true });
     await product.save();
-    res.redirect(`/manage/products/#${productId}`)
+    req.flash('success', `Successfully updated ${product.name}!`);
+    res.redirect(`/manage/products#${productId}`)
+})
+
+app.delete('/manage/products', isLoggedIn, isAdmin, async (req, res) => {
+    const id = req.query.product;
+    const product = await Product.findById(id);
+    const productName = product.name;
+    await Product.findByIdAndDelete(id);
+    req.flash('success', `Successfully deleted ${productName}!`);
+    res.redirect('/manage/products')
 })
 
 app.get('/manage/customers', isLoggedIn, isAdmin, async (req, res) => {
