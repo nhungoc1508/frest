@@ -359,8 +359,11 @@ app.get('/manage/orders', isLoggedIn, isAdmin, async (req, res) => {
     res.render('admin/manage-orders', { orders })
 })
 
-app.get('/search', (req, res) => {
-    res.render('product/search')
+app.get('/search', async (req, res) => {
+    const { query } = req.query;
+    console.log(query)
+    const matches = await Product.find({ name: { $regex: `.*${query}.*` } })
+    res.render('product/search', { matches })
 })
 
 app.use((err, req, res, next) => {

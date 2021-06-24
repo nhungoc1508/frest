@@ -1,2 +1,6 @@
 <% layout('layouts/boilerplate') %>
 <script src="javascripts/search.js"></script>
+<% for (let match of matches) { %>
+<p><%=match%></p>
+<br>
+<% } %>  
