@@ -7,7 +7,8 @@
     <li>Price: <%= product.price %></li>
     <li>Category: <%= product.category %></li>
     <li>Stock: <%= product.stock %></li>
-    <li>Discount: <%= product.discount * 100 %>%</li>
+    <li>Discount: <%= product.discount %>%</li>
+    <li>Discounted price: <%= product.discountedPrice %></li>
 </ul>
 <form class="d-inline" action="/products/<%=product._id%>" method="POST">
     <input type="number" name="qty" id="qty" value="1">

@@ -51,7 +51,7 @@ const UserSchema = new Schema({
 UserSchema.virtual('total').get(function () {
     let total = 0;
     for (let item of this.cart) {
-        total += item.product.price * item.qty;
+        total += item.product.discountedPrice * item.qty;
     }
     return total
 });

@@ -42,7 +42,7 @@ const ProductSchema = new Schema({
 });
 
 ProductSchema.virtual('discountedPrice').get(function () {
-    return this.price * (this.discount / 100)
+    return this.price * (100 - this.discount) / 100
 });
 
 module.exports = mongoose.model('Product', ProductSchema);;
