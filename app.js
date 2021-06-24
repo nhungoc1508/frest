@@ -83,6 +83,7 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
+    res.locals.info = req.flash('info');
     next();
 })
 
@@ -228,7 +229,12 @@ app.get('/checkout', async (req, res) => {
             path: 'product'
         }
     });
-    res.render('user/checkout', { user })
+    if (user.cart.length == 0) {
+        req.flash('info', 'You do not have any item in your cart.')
+        res.redirect('/profile')
+    } else {
+        res.render('user/checkout', { user })
+    }
 })
 
 app.post('/checkout', async (req, res) => {
@@ -295,6 +301,18 @@ app.put('/info', async (req, res) => {
     // console.log(user.addresses);
     await user.save();
     req.flash('success', 'Successfully updated information!');
+    res.redirect('/info')
+})
+
+app.post('/info', async (req, res) => {
+    const { street, city } = req.body;
+    const { addressId } = req.query;
+    const id = res.locals.currentUser._id;
+    const user = await User.findById(id).populate('addresses');
+    const addressIndexInArray = user.addresses.findIndex(a => a._id == addressId);
+    user.addresses[addressIndexInArray] = { street, city };
+    await user.save();
+    req.flash('success', 'Successfully updated address!');
     res.redirect('/info')
 })
 
