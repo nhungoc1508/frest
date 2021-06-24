@@ -122,3 +122,63 @@
                 })
             }
         </script>
+
+        <h1>Search?</h1>
+        <link rel="stylesheet" type="text/css"
+            href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.4/dist/instantsearch.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.4"></script>
+        <link rel="stylesheet" type="text/css"
+            href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.4/dist/instantsearch-theme-algolia.min.css">
+        <!-- <script src="./tmp.js"></script> -->
+
+        <div id="search-box">
+            <!-- SearchBox widget will appear here -->
+        </div>
+
+        <div id="hits">
+            <!-- Hits widget will appear here -->
+        </div>
+
+        <script type="text/html" id="hit-template">
+            <div class="hit">
+                <div class="hit-image">
+                    <img src="{{image}}" alt="{{name}}" class="img-thumbnail">
+                </div>
+                <div class="hit-content">
+                    <h4 class="hit-name">{{{_highlightResult.name.value}}}</h4>
+                    <p class="hit-price">${{price}}</p>
+                    <p class="hit-description">{{{_highlightResult.description.value}}}</p>
+                </div>
+            </div>
+        </script>
+
+        <script>
+            const search = instantsearch({
+                appId: 'latency',
+                apiKey: '6be0576ff61c053d5f9a3225e2a90f76',
+                indexName: 'instant_search',
+                routing: true
+            });
+
+            // initialize SearchBox
+            search.addWidget(
+                instantsearch.widgets.searchBox({
+                    container: '#search-box',
+                    placeholder: 'Search for products'
+                })
+            );
+
+            // initialize hits widget
+            search.addWidget(
+                instantsearch.widgets.hits({
+                    container: '#hits',
+                    hitsPerpage: 10,
+                    templates: {
+                        item: document.getElementById('hit-template').innerHTML,
+                        empty: "No search results found for query <em>\"{{query}}\"</em>"
+                    }
+                })
+            );
+
+            search.start();
+        </script>
