@@ -106,9 +106,9 @@ app.post('/products', isLoggedIn, isAdmin, upload.single('imageUpload'), async (
     delete req.session.returnTo;
     const product = new Product(req.body.product);
     if (req.file) {
-        console.log(req.file)
+        // console.log(req.file)
         product.image = { url: req.file.path, filename: req.file.filename };
-    } else{
+    } else {
         product.image = { url: req.body.product.image }
     }
     await product.save();
@@ -148,9 +148,20 @@ app.post('/products/:id', isLoggedIn, async (req, res) => {
     res.redirect(redirectUrl)
 })
 
-app.put('/products/:id', isLoggedIn, isAdmin, async (req, res) => {
+app.put('/products/:id', isLoggedIn, isAdmin, upload.single('imageUpload'), async (req, res) => {
+    // const { id } = req.params;
+    // const product = await Product.findByIdAndUpdate(id, { ...req.body.product }, { new: true });
+    // await product.save();
+    // req.flash('success', 'Successfully updated product!');
+    // res.redirect(`/products/${product._id}`)
+
     const { id } = req.params;
     const product = await Product.findByIdAndUpdate(id, { ...req.body.product }, { new: true });
+    if (req.body.imageMethod == 'URL') {
+        product.image = { url: req.body.imageURL, filename: ''};
+    } else {
+        product.image = { url: req.file.path, filename: req.file.filename }
+    }
     await product.save();
     req.flash('success', 'Successfully updated product!');
     res.redirect(`/products/${product._id}`)
@@ -166,6 +177,7 @@ app.delete('/products/:id', isLoggedIn, isAdmin, async (req, res) => {
 app.get('/products/:id/edit', isLoggedIn, isAdmin, async (req, res) => {
     const { id } = req.params;
     const product = await Product.findById(id);
+    console.log(product.image.filename == null)
     res.render('product/edit', { product })
 })
 
