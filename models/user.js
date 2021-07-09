@@ -56,6 +56,14 @@ UserSchema.virtual('total').get(function () {
     return total
 });
 
+UserSchema.virtual('totalSpent').get(function () {
+    let totalSpent = 0;
+    for (let order of this.orders) {
+        totalSpent += order.total
+    }
+    return totalSpent
+})
+
 // UserSchema.virtual('fullAddresses').get(function () {
 
 // })

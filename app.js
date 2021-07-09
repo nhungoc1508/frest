@@ -13,6 +13,10 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const MongoStore = require('connect-mongo');
 
+const { cloudinary, storage } = require('./cloudinary');
+const multer = require('multer');
+const upload = multer({ storage });
+
 const Product = require('./models/product');
 const User = require('./models/user');
 const Order = require('./models/order');
@@ -41,6 +45,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use('/static', express.static(path.join(__dirname, 'public')));
 
 const secret = process.env.SECRET || 'asecret';
 
@@ -96,9 +101,16 @@ app.get('/products', async (req, res) => {
     res.render('product/index', { products })
 })
 
-app.post('/products', isLoggedIn, isAdmin, validateProduct, async (req, res) => {
-    // delete req.session.returnTo;
+app.post('/products', isLoggedIn, isAdmin, upload.single('imageUpload'), async (req, res) => {
+    // ADD VALIDATEPRODUCT MIDDLEWARE
+    delete req.session.returnTo;
     const product = new Product(req.body.product);
+    if (req.file) {
+        console.log(req.file)
+        product.image = { url: req.file.path, filename: req.file.filename };
+    } else{
+        product.image = { url: req.body.product.image }
+    }
     await product.save();
     res.redirect(`/products/${product._id}`)
 })
@@ -329,7 +341,7 @@ app.put('/manage/products', isLoggedIn, isAdmin, async (req, res) => {
     const product = await Product.findByIdAndUpdate(productId, { name, price, stock, discount }, { new: true });
     await product.save();
     req.flash('success', `Successfully updated ${product.name}!`);
-    res.redirect(`/manage/products#${productId}`)
+    res.redirect('/manage/products')
 })
 
 app.delete('/manage/products', isLoggedIn, isAdmin, async (req, res) => {
@@ -342,7 +354,8 @@ app.delete('/manage/products', isLoggedIn, isAdmin, async (req, res) => {
 })
 
 app.get('/manage/customers', isLoggedIn, isAdmin, async (req, res) => {
-    const customers = await User.find({ role: { $ne: 'admin' } })
+    // const customers = await User.find({ role: { $ne: 'admin' } }).populate('orders')
+    const customers = await User.find({}).populate('orders')
     res.render('admin/manage-customers', { customers })
 })
 
@@ -361,7 +374,7 @@ app.get('/manage/orders', isLoggedIn, isAdmin, async (req, res) => {
 
 app.get('/search', async (req, res) => {
     const { query } = req.query;
-    console.log(query)
+    // console.log(query)
     const matches = await Product.find({ name: { $regex: `.*${query}.*` } })
     res.render('product/search', { matches })
 })
