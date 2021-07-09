@@ -263,29 +263,34 @@ app.get('/checkout', async (req, res) => {
 
 app.post('/checkout', async (req, res) => {
     const { address } = req.body;
-    const user = await User.findById(req.user._id).populate({
-        path: 'cart',
-        populate: {
-            path: 'product'
+    if (!address) {
+        req.flash('error', 'You currently have no address. Please add an address first.')
+        res.redirect('/info')
+    } else {
+        const user = await User.findById(req.user._id).populate({
+            path: 'cart',
+            populate: {
+                path: 'product'
+            }
+        });
+        // Without populating, user.total is NaN
+        const addressIndex = user.addresses.findIndex(add => add._id == address);
+        const addressObj = user.addresses[addressIndex];
+        const order = new Order({
+            customer: user,
+            address: addressObj,
+            cart: user.cart,
+            total: user.total
+        });
+        await order.save();
+        user.orders.push(order);
+        while (user.cart.length > 0) {
+            user.cart.pop();
         }
-    });
-    // Without populating, user.total is NaN
-    const addressIndex = user.addresses.findIndex(add => add._id == address);
-    const addressObj = user.addresses[addressIndex];
-    const order = new Order({
-        customer: user,
-        address: addressObj,
-        cart: user.cart,
-        total: user.total
-    });
-    await order.save();
-    user.orders.push(order);
-    while (user.cart.length > 0) {
-        user.cart.pop();
+        await user.save();
+        req.flash('success', 'Successfully placed an order!');
+        res.redirect('/profile')
     }
-    await user.save();
-    req.flash('success', 'Successfully placed an order!');
-    res.redirect('/profile')
 })
 
 app.get('/logout', (req, res) => {
