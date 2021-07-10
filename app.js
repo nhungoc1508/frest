@@ -158,7 +158,7 @@ app.post('/products/:id', isLoggedIn, async (req, res) => {
     res.redirect(redirectUrl)
 })
 
-app.put('/products/:id', isLoggedIn, isAdmin, upload.single('imageUpload'), async (req, res) => {
+app.put('/products/:id', isLoggedIn, isAdmin, validateProduct, upload.single('imageUpload'), async (req, res) => {
     // const { id } = req.params;
     // const product = await Product.findByIdAndUpdate(id, { ...req.body.product }, { new: true });
     // await product.save();
@@ -361,7 +361,7 @@ app.get('/manage/products', isLoggedIn, isAdmin, async (req, res) => {
     res.render('admin/manage-products', { products, categories })
 })
 
-app.put('/manage/products', isLoggedIn, isAdmin, async (req, res) => {
+app.put('/manage/products', isLoggedIn, isAdmin, validateProduct, async (req, res) => {
     const productId = req.query.product;
     // console.log(req.body.product);
     const { name, price, stock, discount } = req.body.product;

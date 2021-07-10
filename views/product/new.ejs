@@ -7,7 +7,7 @@
     </div>
     <div class="mb-3">
         <label class="form-label" for="price">Product price</label>
-        <input class="form-control" type="number" name="product[price]" id="price" required>
+        <input class="form-control" type="number" name="product[price]" id="price" min="0" required>
     </div>
 
     <div class="mb-3 row">
@@ -30,7 +30,7 @@
 
     <div class="mb-3">
         <label class="form-label" for="stock">Available stock</label>
-        <input class="form-control" type="number" name="product[stock]" id="stock" value="100" required>
+        <input class="form-control" type="number" name="product[stock]" id="stock" value="100" min="0" required>
     </div>
     <div class="mb-3">
         <label class="form-label" for="category">Product category</label>

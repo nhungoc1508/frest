@@ -35,13 +35,13 @@
                                     <input type="text" name="product[name]" class="form-control" value="<%=product.name%>" readonly required>
                                 </td>
                                 <td>
-                                    <input type="number" name="product[price]" class="form-control" value="<%=product.price%>" readonly required>
+                                    <input type="number" name="product[price]" class="form-control" value="<%=product.price%>" readonly required min="0">
                                 </td>
                                 <td>
-                                    <input type="number" name="product[stock]" class="form-control" value="<%=product.stock%>" readonly required>
+                                    <input type="number" name="product[stock]" class="form-control" value="<%=product.stock%>" readonly required min="0">
                                 </td>
                                 <td>
-                                    <input type="number" name="product[discount]" class="form-control" value="<%=product.discount%>" readonly required>
+                                    <input type="number" name="product[discount]" class="form-control" value="<%=product.discount%>" readonly required min="0" max="100">
                                 </td>
                                 <td>
                                     <a href="/products/<%=product._id%>">Details</a>
