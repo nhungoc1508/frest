@@ -97,7 +97,17 @@ app.get('/', (req, res) => {
 });
 
 app.get('/products', async (req, res) => {
-    const products = await Product.find({});
+    const { category } = req.query;
+    let products;
+    if (category == null) {
+        products = await Product.find({});
+    } else {
+        products = await Product.find({ category: category })
+    }
+    if (products.length == 0) {
+        req.flash('error', 'The content you requested does not exist.')
+        res.redirect('/products')
+    }
     res.render('product/index', { products })
 })
 
