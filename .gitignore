@@ -3,3 +3,4 @@ node_modules
 .DS_Store
 scratch.ejs
 views/sandbox.ejs
+product_seeding
