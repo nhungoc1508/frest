@@ -1,6 +1,18 @@
 <% layout('layouts/boilerplate') %>
 <script src="javascripts/search.js"></script>
-<% for (let match of matches) { %>
-<p><%=match%></p>
-<br>
-<% } %>  
+<form action="/search" method="POST" class="mb-3">
+    <label class="form-label" for="search">Search</label>
+    <input class="form-control" type="text" name="query" id="search" value="<%=query==null ? '' : query%>">
+</form>
+<% if (matches.length == 0 && query == null) { %>
+    <h1>Start searching something</h1>
+<% } else if (matches.length ==0 && query != null) { %>
+    <h1>No match found.</h1>
+<% } else { %>   
+    <% for (let product of matches) { %>
+        <li><%= product.name %> - <%= product.category %> - Price: <%= product.price %> - <a href="/products/<%=product._id%>">See details</a></li>
+        <form class="d-inline" action="/products/<%=product._id%>" method="POST">
+            <button class="btn btn-info">Add to cart</button>
+        </form>
+    <% } %>
+<% } %> 

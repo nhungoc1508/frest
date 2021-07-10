@@ -391,9 +391,16 @@ app.get('/manage/orders', isLoggedIn, isAdmin, async (req, res) => {
 
 app.get('/search', async (req, res) => {
     const { query } = req.query;
-    // console.log(query)
     const matches = await Product.find({ name: { $regex: `.*${query}.*` } })
-    res.render('product/search', { matches })
+    // console.log(matches)
+    res.render('product/search', { matches, query })
+})
+
+app.post('/search', (req, res) => {
+    // console.log(req.body)
+    // res.send(req.query)
+    const query = req.body.query;
+    res.redirect(`/search?query=${query}`)
 })
 
 app.use((err, req, res, next) => {
