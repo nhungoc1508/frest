@@ -97,7 +97,7 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-    res.send('Ok')
+    res.render('home')
 });
 
 app.use('/products', productRoutes);

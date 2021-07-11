@@ -1,0 +1,95 @@
+#upper {
+    background: linear-gradient(to right, #6BC1C2, #A3DCA7);
+}
+
+#lower {
+    background: linear-gradient(to right, #2F4858, #53A199);
+}
+
+#scrollable {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.navbar-container {
+    max-width: 90vw;
+}
+
+div.scroll-menu {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+#lower a {
+    color: #A3DCA7;
+    padding: 5px 15px;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+}
+
+#lower a:hover {
+    text-decoration: none;
+    color: #6BC1C2;
+    opacity: 1;
+}
+
+#lower a:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #6BC1C2;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+}
+
+#lower .active {
+    color: #6BC1C2;
+    opacity: 1;
+}
+
+#lower .active:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 0;
+    position: absolute;
+    background: #6BC1C2;
+    width: 100%;
+}
+
+#lower a:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+#upper {
+    position: relative;
+    z-index: 10;
+}
+
+#upper a {
+    color: white;
+    padding: 5px 15px;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+}
+
+#upper a:hover {
+    color: #2F4858;
+}
+
+.dropdown-menu {
+    background-color: #2F4858;
+}
+
+.big-icon>i {
+    font-size: 1.5em;
+}

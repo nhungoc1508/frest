@@ -13,7 +13,7 @@ module.exports.index = async (req, res) => {
         req.flash('error', 'The content you requested does not exist.')
         res.redirect('/products')
     }
-    res.render('product/index', { products })
+    res.render('product/index', { products, category })
 };
 
 module.exports.renderNewProduct = (req, res) => {

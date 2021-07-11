@@ -1,5 +1,6 @@
 const Product = require('../models/product');
 const User = require('../models/user');
+const Order = require('../models/order');
 
 module.exports.renderProducts = async (req, res) => {
     const products = await Product.find({});
