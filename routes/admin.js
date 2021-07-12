@@ -3,11 +3,11 @@ const router = express.Router();
 const admin = require('../controllers/admin');
 const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
-const { isLoggedIn, isAdmin, validateProduct } = require('../middleware');
+const { isLoggedIn, isAdmin } = require('../middleware');
 
 router.route('/products')
     .get(isLoggedIn, isAdmin, catchAsync(admin.renderProducts))
-    .put(isLoggedIn, isAdmin, validateProduct, catchAsync(admin.updateProduct))
+    .put(isLoggedIn, isAdmin, catchAsync(admin.updateProduct))
     .delete(isLoggedIn, isAdmin, catchAsync(admin.deleteProduct));
 
 router.route('/customers')

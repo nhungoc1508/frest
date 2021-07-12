@@ -7,3 +7,8 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+#two {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

@@ -1,0 +1,97 @@
+.product-card {
+    border-radius: 8px;
+    height: 350px;
+    width: 225px;
+    margin-top: 30px;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.25);
+    position: relative;
+    background: linear-gradient(to right, #53A199, #356573);
+}
+
+.product-img-ctn {
+    background: #A3DCA7;
+    border-radius: 8px 8px 0px 0px;
+    height: 225px;
+    width: 225px;
+    /* background-color: black; */
+    position: relative;
+}
+
+.product-img-ctn img {
+    border-radius: 8px 8px 0px 0px;
+    width: 225px;
+    height: 100%;
+    float: left;
+    object-fit: cover;
+    position: absolute;
+}
+
+#shopping-cart-icon {
+    font-size: 25px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    color: black;
+    background: #A3DCA7;
+    color: black;
+    /* background: linear-gradient(to right, #A3DCA7, #75BFA2); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: -25px; */
+    z-index: 10;
+    transition: background 0.3s, color 0.3s;
+}
+
+#shopping-cart-icon:hover {
+    /* background: linear-gradient(to left, #356573, #2F4858); */
+    background: #2F4858;
+    color: white;
+}
+
+#cart-button {
+    font-size: 25px;
+    height: 50px;
+    width: 50px;
+    margin-top: -25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    padding: 0;
+    outline: 0;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.product-card > div >p {
+    margin: 0;
+}
+
+.detail-btn {
+    position: absolute;
+    margin-top: 45%;
+    text-decoration: none;
+    color: white;
+    background-color: #2F4858;
+    padding: 5px 10px 5px 10px;
+    transition: background-color 0.2s;
+}
+
+.detail-btn:hover {
+    background-color: white;
+}
+
+/* .product-card:hover>.product-img-ctn>.detail-btn {
+    position: absolute;
+    visibility: visible;
+}
+
+.see-detail {
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+    background-color: #D4B563;
+    color: white;
+    border-radius: 0;
+    border: 0;
+} */

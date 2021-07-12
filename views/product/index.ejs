@@ -1,15 +1,43 @@
 <% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/index.css">
 <div class="container">
     <h1>All products</h1>
     <%const cat = category == null ? 'all' : category%>
-    <ul>
+    <!-- <ul>
         <% for (let product of products) { %>
         <li><%= product.name %> - <%= product.category %> - Price: <%= product.price %> - <a href="/products/<%=product._id%>">See details</a></li>
         <form class="d-inline" action="/products/<%=product._id%>" method="POST">
             <button class="btn btn-info">Add to cart</button>
         </form>
         <% } %>
-    </ul>
+    </ul> -->
+    <div class="d-flex flex-row flex-wrap justify-content-around">
+        <% for (let product of products) { %>
+            <div class="product-card">
+                <div class="product-img-ctn d-flex justify-content-center">
+                    <img class="product-img" src="<%=product.image.url%>" alt="<%=product.name%>">
+                    <!-- <div class="d-flex detail-btn d-none"> -->
+                    <a class="d-flex detail-btn btn d-none" href="/products/<%=product._id%>">SEE DETAILS</a>
+                    <!-- </div> -->
+                </div>
+                <div class="d-flex justify-content-center">
+                    <form action="/products/<%=product._id%>" method="POST">
+                        <input type="hidden" name="" value="">
+                        <button id="cart-button" <%=product.stock>10 ? '':'disabled'%>><i class="fas fa-cart-arrow-down shopping" id="shopping-cart-icon"></i></button>
+                    </form>
+                </div>
+                <div class="text-center">
+                    <p class="text-capitalize"><strong><%=product.name%></strong></p>
+                    <% if (product.discount == 0) { %>
+                        <p>AED <%=product.price%></p>
+                    <% } else { %>
+                        <p><del>AED <%=product.price%></del></p>
+                        <h5><span class="badge bg-info"><i class="fas fa-tag"></i> AED <%=product.discountedPrice%></span></h5>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+    </div>
 </div>
 
 <script>
@@ -18,8 +46,18 @@
     for (let child of menu.children) {
         child.classList.remove('active');
     }
-    if (menu != 'a') {
+    if (category != 'all') {
         const menuLabel = document.getElementById(`${category}-label`);
         menuLabel.classList.add('active');
+    }
+
+    const imgCtns = document.getElementsByClassName('product-img-ctn');
+    for (let imgCtn of imgCtns) {
+        imgCtn.addEventListener('mouseenter', function () {
+            imgCtn.children[1].classList.toggle('d-none');
+        })
+        imgCtn.addEventListener('mouseleave', function () {
+            imgCtn.children[1].classList.toggle('d-none');
+        })
     }
 </script>
