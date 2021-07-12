@@ -1,0 +1,9 @@
+#parallax {
+    background-image:
+        linear-gradient(to right, rgba(163, 220, 167, 0.2), rgba(47, 72, 88, 0.2)),
+        url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2767&q=80');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

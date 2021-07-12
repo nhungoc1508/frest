@@ -18,6 +18,8 @@
     for (let child of menu.children) {
         child.classList.remove('active');
     }
-    const menuLabel = document.getElementById(`${category}-label`);
-    menuLabel.classList.add('active');
+    if (menu != 'a') {
+        const menuLabel = document.getElementById(`${category}-label`);
+        menuLabel.classList.add('active');
+    }
 </script>

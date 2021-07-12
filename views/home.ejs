@@ -1,8 +1,15 @@
 <% layout('layouts/boilerplate') %>
-<div class="container d-flex w-100 h-100 mx-auto flex-column">
+<link rel="stylesheet" href="/stylesheets/home.css">
+<div class="container-fluid d-flex w-100 h-75 mx-auto flex-column" id="parallax">
     <div class="mb-auto"></div>
     <div class="text-center">
-        <h1>Hello</h1>
+        <h1 class="text-light">
+            <%=currentUser ? "Welcome back!" : "Start today!"%>
+        </h1>
+        <h4 class="text-light">Everything you need, at your doorstep.</h4>
     </div>
     <div class="mt-auto"></div>
+</div>
+<div class="container-fluid d-flex w-100 h-100 flex-column" id="two">
+    <h1>Hello world</h1>
 </div>
