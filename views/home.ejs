@@ -10,6 +10,54 @@
     </div>
     <div class="mt-auto"></div>
 </div>
-<div class="container-fluid d-flex w-100 h-100 flex-column" id="two">
-    <h1>Hello world</h1>
-</div>
+<section class="w-100">
+    <div class="container-fluid d-flex flex-column banner text-center" id="featured-banner">
+        <h3 class="lead">FEATURED PRODUCTS</h3>
+    </div>
+    <div class="container py-3">
+        <%- include('./partials/product-cards') %>
+    </div>
+</section>
+<section class="w-100">
+    <div class="container-fluid d-flex flex-column banner text-center" id="promotions-banner">
+        <h3 class="lead">ONGOING PROMOTIONS</h3>
+    </div>
+    <div class="container-fluid w-100 py-5">
+        <div class="row justify-content-center pb-5">
+            <div class="col-10 col-md-8 row promotions-card">
+                <div class="col-12 col-sm-6 d-flex justify-content-center promotions-img-ctn left">
+                    <img class="left" src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80" alt="">
+                </div>
+                <div class="col-12 col-sm-6 mx-auto d-flex flex-column promotions-content-ctn">
+                    <div class="mb-auto"></div>
+                    <div class="text-center">
+                        <h3 class="lead">Farmers' Market Greens</h3>
+                        <h4><span class="badge bg-info">15% off</span></h4>
+                        <p>for a variety of vegetables products!</p>
+                    </div>
+                    <div class="mt-auto text-center">
+                        <a href="/products?category=vegetables">Shop now!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center pb-5">
+            <div class="col-10 col-md-8 row promotions-card">
+                <div class="col-12 col-sm-6 mx-auto d-flex flex-column promotions-content-ctn">
+                    <div class="mb-auto"></div>
+                    <div class="text-center">
+                        <h3 class="lead">Fresh Summer</h3>
+                        <h4><span class="badge bg-info">Free shipping</span></h4>
+                        <p>for all orders of fruits and juice above AED 100!</p>
+                    </div>
+                    <div class="mt-auto text-center">
+                        <a href="/products?category=fruits">Shop now!</a>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-center promotions-img-ctn right">
+                    <img class="right" src="https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

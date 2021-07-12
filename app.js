@@ -96,8 +96,9 @@ app.use((req, res, next) => {
     next();
 })
 
-app.get('/', (req, res) => {
-    res.render('home')
+app.get('/', async (req, res) => {
+    const featuredProducts = await Product.find({}).sort({price: -1}).limit(10);
+    res.render('home', { products: featuredProducts })
 });
 
 app.use('/products', productRoutes);

@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="/stylesheets/product-cards.css">
+<div class="d-flex flex-row flex-wrap justify-content-around">
+    <% for (let product of products) { %>
+        <div class="product-card">
+            <div class="product-img-ctn d-flex justify-content-center">
+                <img class="product-img" src="<%=product.image.url%>" alt="<%=product.name%>">
+                <a class="d-flex detail-btn btn d-none" href="/products/<%=product._id%>">SEE DETAILS</a>
+            </div>
+            <div class="d-flex justify-content-center">
+                <form action="/products/<%=product._id%>" method="POST">
+                    <input type="hidden" name="" value="">
+                    <button id="cart-button" <%=product.stock>10 ? '':'disabled'%>><i class="fas fa-cart-arrow-down shopping" id="shopping-cart-icon"></i></button>
+                </form>
+            </div>
+            <div class="text-center position-relative">
+                <p class="text-capitalize"><strong><%=product.name%></strong></p>
+                <% if (product.discount == 0) { %>
+                    <p>AED <%=product.price%></p>
+                <% } else { %>
+                    <p><del>AED <%=product.price%></del></p>
+                    <h5><span class="badge bg-info"><i class="fas fa-tag"></i> AED <%=product.discountedPrice%></span>
+                <% } %>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+<script>
+    const imgCtns = document.getElementsByClassName('product-img-ctn');
+    for (let imgCtn of imgCtns) {
+        imgCtn.addEventListener('mouseenter', function () {
+            imgCtn.children[1].classList.toggle('d-none');
+        })
+        imgCtn.addEventListener('mouseleave', function () {
+            imgCtn.children[1].classList.toggle('d-none');
+        })
+    }
+</script>

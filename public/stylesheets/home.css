@@ -1,14 +1,99 @@
 #parallax {
-    background-image:
-        linear-gradient(to right, rgba(163, 220, 167, 0.2), rgba(47, 72, 88, 0.2)),
-        url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2767&q=80');
+    background-image: linear-gradient(to right, rgba(163, 220, 167, 0.2), rgba(47, 72, 88, 0.2)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2767&q=80');
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
+section {
+    margin-top: 100px;
+}
+
+.banner {
+    color: white;
+    padding: 30px 0px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#featured-banner {
+    background-image:
+        linear-gradient(to left, rgb(47, 72, 88, 0.8), rgb(117, 191, 162, 0.8)),
+        url('https://images.unsplash.com/photo-1523472721958-978152f4d69b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80');
+}
+
+#promotions-banner {
+    background-image: linear-gradient(to left, rgb(47, 72, 88, 0.8), rgb(117, 191, 162, 0.8)), url('https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2760&q=80');
+}
+
+.promotions-card {
+    background: linear-gradient(to right, #75BFA2, #53A199);
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    padding: 0;
+}
+
+.promotions-img-ctn {
+    position: relative;
+    height: 25vh;
+}
+
+.left {
+    border-radius: 8px 8px 0px 0px;
+}
+
+.right {
+    border-radius: 0px 0px 8px 8px;
+}
+
+.promotions-img-ctn img {
+    width: 100%;
+    height: 25vh;
+    float: left;
+    object-fit: cover;
+    position: absolute;
+}
+
+.promotions-content-ctn {
+    min-height: 25vh;
+}
+
+.promotions-card a {
+    text-decoration: none;
+    color: white;
+}
+
+.promotions-card a:hover {
+    color: #2F4858;
+}
+
+#one {
+    background-color: rgb(47, 72, 88, 1);
+}
+
 #two {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    background-color: beige;
+}
+
+#mycol1 {
+    background-color: #A3DCA7;
+}
+
+#mycol2 {
+    background-color: #53A199;
+}
+
+@media (min-width: 576px) {
+    .promotions-img-ctn, .promotions-img-ctn img {
+        height: 35vh;
+    }
+    .left {
+        border-radius: 8px 0px 0px 8px;
+    }
+    .right {
+        border-radius: 0px 8px 8px 0px;
+    }
 }
