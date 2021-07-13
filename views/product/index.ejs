@@ -3,7 +3,9 @@
 <div class="container">
     <h1>All products</h1>
     <%const cat = category == null ? 'all' : category%>
+    <div class="d-flex flex-row flex-wrap justify-content-around">
     <%- include('../partials/product-cards') %>
+    </div>
 </div>
 
 <script>

@@ -97,3 +97,8 @@ section {
         border-radius: 0px 8px 8px 0px;
     }
 }
+
+div.scroll-menu {
+    overflow: auto;
+    white-space: nowrap;
+}
