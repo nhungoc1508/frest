@@ -1,14 +1,21 @@
 <% layout('layouts/boilerplate')%>
-<div class="container justify-content-center align-items-center my-5">
+<link rel="stylesheet" href="/stylesheets/forms.css">
+<div class="container-fluid d-flex w-100 mx-auto flex-column">
     <div class="row">
-        <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
-            <div class="card shadow">
-                <div class="card-body">
-                    <h2 class="card-title text-center">Register</h2>
-                    <form action="/register" method="POST" class="needs-validation" novalidate>
+        <div class="col-md-6 d-flex flex-column" id="left-section-register">
+            <div class="mb-auto"></div>
+            <h2 class="text-center text-light">Everything you need, at your doorstep. Start today!</h2>
+            <div class="mt-auto"></div>
+        </div>
+        <div class="col-12 col-md-6 justify-content-center" id="right-section-register">
+            <div class="col-10 my-5 text-center p-3 mx-auto d-flex flex-column" id="register-card">
+                <div class="mb-auto"></div>
+                <div class="container">
+                    <h2>Register</h2>
+                    <form action="/register" method="POST" class="needs-validation lead mt-3" novalidate>
                         <div class="mb-3">
                             <label class="form-label" for="username">Username</label>
-                            <input class="form-control" type="text" id="username" name="username" required autofocus>
+                            <input class="form-control" type="text" id="username" name="username" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -27,11 +34,10 @@
                                 Looks good!
                             </div>
                         </div>
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-success">Register</button>
-                        </div>
+                        <button class="mt-3 btn custom-btn">Register</button>
                     </form>
                 </div>
+                <div class="mt-auto"></div>
             </div>
         </div>
     </div>
