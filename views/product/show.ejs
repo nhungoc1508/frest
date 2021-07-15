@@ -1,29 +1,63 @@
 <% layout('layouts/boilerplate') %>
-<h1><%= product.name %></h1>
-<% if (product.image) { %> 
-<img src="<%=product.image.url%>" alt="" class="img-thumbnail">
-<% } %> 
-<ul>
-    <li>Price: <%= product.price %></li>
-    <li>Category: <%= product.category %></li>
-    <li>Stock: <%= product.stock %></li>
-    <li>Discount: <%= product.discount %>%</li>
-    <li>Discounted price: <%= product.discountedPrice %></li>
-</ul>
-<form class="d-inline" action="/products/<%=product._id%>" method="POST">
-    <input type="number" name="qty" id="qty" value="1"  min="1" max="<%=product.stock%>">
-    <button class="btn btn-info">Add to cart</button>
-</form>
-<% if (currentUser) { %>
-<% if (currentUser.role === 'admin') { %> 
-<form class="d-inline" action="/products/<%=product._id%>?_method=DELETE" method="POST">
-    <button class="btn btn-danger">Delete</button>
-</form>
-<div>
-    <a href="/products/<%=product._id%>/edit">Edit product</a>
-</div>
-<% } %>
-<% } %>
-<div>
-    <a href="/products">Back to index</a>
+<link rel="stylesheet" href="/stylesheets/show.css">
+<div class="container-fluid h-100">
+    <div class="row justify-content-center my-5">
+        <div class="col-10">
+            <div class="row g-0 product-card">
+                <div class="col-12 col-md-6 left">
+                    <div class="product-img-ctn d-flex" id="two">
+                        <img src="<%=product.image.url%>" alt="<%=product.name%>">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 p-3 d-flex flex-column right lead">
+                    <div class="text-center content-section">
+                        <h6 class="display-6 product-name"><%=product.name%></h6>
+                    </div>
+                    <div class="text-center content-section">
+                        <h5><a href="/products?category=<%=product.category%>"><span class="badge bg-info me-2 text-capitalize"><%=product.category%></span></a>
+                            <% if (product.stock <= 10) { %>
+                                <span class="badge bg-danger">Out of stock</span>
+                            <% } %> 
+                        </h5>
+                        <% if (product.discount == 0) { %>
+                            <p>AED <%=product.price%></p>
+                        <% } else { %>
+                            <p><del>AED <%=product.price%></del> 
+                                <strong>AED <%=product.discountedPrice%></strong>
+                                <span class="badge bg-warning"><%=product.discount%>% off</span>
+                            </p>
+                        <% } %>
+                    </div>
+                    <div class="content-section">
+                        <p>A short and descriptive caption for our wonderful product goes here.</p>
+                    </div>
+                    <div class="content-section">
+                        <form class="d-flex justify-content-between" action="/products/<%=product._id%>" method="POST">
+                            <input type="number" name="qty" id="qty" value="1"  min="1" max="<%=product.stock%>">
+                            <button class="ms-auto btn custom-btn">Add to cart</button>
+                        </form>
+                    </div>
+                    <% if (currentUser) { %>
+                        <% if (currentUser.role === 'admin') { %>
+                            <div class="row">
+                                <div class="col-6 d-flex justify-content-center">
+                                    <form class="d-inline" action="/products/<%=product._id%>?_method=DELETE" method="POST">
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                                <div class="col-6 d-flex justify-content-center">
+                                    <form class="d-inline" action="/products/<%=product._id%>/edit?_method=GET" method="POST">
+                                        <button class="btn btn-info">Edit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% } %>
+                    <div class="mt-auto text-center">
+                        <a href="/products"><i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
