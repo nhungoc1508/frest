@@ -29,10 +29,10 @@
     const imgCtns = document.getElementsByClassName('product-img-ctn');
     for (let imgCtn of imgCtns) {
         imgCtn.addEventListener('mouseenter', function () {
-            imgCtn.children[1].classList.toggle('d-none');
+            imgCtn.children[1].classList.remove('d-none');
         })
         imgCtn.addEventListener('mouseleave', function () {
-            imgCtn.children[1].classList.toggle('d-none');
+            imgCtn.children[1].classList.add('d-none');
         })
     }
 </script>

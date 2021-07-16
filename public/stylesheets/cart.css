@@ -1,6 +1,6 @@
 .cart-card {
     box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.25);
-    padding: 20px;
+    padding: 30px 20px 30px 20px;
 }
 
 .section-title {
@@ -20,6 +20,26 @@
     float: left;
     object-fit: cover;
     position: absolute;
+}
+
+@media (max-width: 576px) {
+    .collapse-col {
+        display: none;
+    }
+
+    .cart-card {
+        padding: 20px 0px 20px 0px;
+    }
+
+    .remove-text {
+        display: none;
+    }
+}
+
+@media (min-width: 577px) {
+    .remove-symbol {
+        display: none;
+    }
 }
 
 .update-btn {

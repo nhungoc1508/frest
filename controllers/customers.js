@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Product = require('../models/product');
+const Order = require('../models/order');
 
 module.exports.renderLogin = (req, res) => { //
     // console.log('Login GET')
@@ -36,14 +37,31 @@ module.exports.register = async (req, res) => {
 };
 
 module.exports.renderCart = async (req, res) => {
-    const user = await User.findById(req.user._id).populate('orders').populate({
+    const user = await User.findById(req.user._id).populate({
+        path: 'orders',
+        populate: {
+            path: 'cart',
+            populate: {
+                path: 'product'
+            }
+        }
+    }).populate({
         path: 'cart',
         populate: {
             path: 'product'
         }
     });
+    console.log(user.orders[0])
+    // Address hasn't been exported as a schema on its own
+    // I'm depending on a roundabout way for now
+    const addressIDs = user.orders.map(order => order.address);
+    const addresses = addressIDs.map(function(address) {
+        const ind = user.addresses.findIndex(add => add._id.equals(address));
+        const addressObj = user.addresses[ind];
+        return addressObj
+    });
 
-    res.render('user/cart', { user })
+    res.render('user/cart', { user, addresses })
 };
 
 module.exports.updateCart = async (req, res) => {

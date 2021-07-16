@@ -10,7 +10,7 @@
                 <thead>
                     <tr>
                         <th scope="col" class="col-2">Product</th>
-                        <th scope="col" class="col-4"></th>
+                        <th scope="col" class="col-4 collapse-col"></th>
                         <th scope="col">Price</th>
                         <th scope="col">Update quantity</th>
                         <th scope="col">Delete</th>
@@ -19,94 +19,112 @@
                 <tbody>
                     <% for (let item of user.cart) { %>
                         <tr>
-                            <td class="text-capitalize"><%=item.product.name%></td>
-                            <td>
+                            <td class="text-capitalize"><a href="/products/<%=item.product._id%>"
+                                    class="update-btn">
+                                    <%=item.product.name%>
+                                </a>
+                            </td>
+                            <td class="collapse-col">
                                 <div class="product-img-ctn d-flex">
-                                    <img src="<%=item.product.image.url%>" alt="<%=item.product.name%>" class="img-thumbnail">
+                                    <img src="<%=item.product.image.url%>" alt="<%=item.product.name%>"
+                                        class="img-thumbnail">
                                 </div>
                             </td>
-                            <td>AED <%=item.product.price%> &times; <%=item.qty%></td>
+                            <% if (item.product.discount == 0) { %> 
+                                <td>AED <%=item.product.price%> &times; <%=item.qty%></td>
+                            <% } else { %>
+                                <td>
+                                    <del>AED <%=item.product.price%></del> 
+                                    AED <%=item.product.discountedPrice%> &times; <%=item.qty%>
+                                    <span class="badge bg-warning">-<%=item.product.discount%>%</span>
+                                </td>
+                            <% } %>  
                             <td>
                                 <form class="" action="/cart?product=<%=item.product._id%>" method="POST">
-                                    <input type="number" name="qty" id="qty" value="<%=item.qty%>" min="1" max="100">
+                                    <input type="number" name="qty" id="qty" value="<%=item.qty%>" min="1"
+                                        max="100">
                                     <button class="btn update-btn">Update</button>
                                 </form>
                             </td>
                             <td>
                                 <form class="d-inline" action="/cart?product=<%=item.product._id%>" method="POST">
-                                    <button class="btn remove-btn">Remove</button>
+                                    <button class="btn remove-btn"><span class="remove-text">Remove</span><i
+                                            class="remove-symbol fas fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>
-                    <% } %>
+                        <% } %>
                 </tbody>
             </table>
-            <h3 class="text-end mb-3">Total: AED <%=user.total%></h3>
-            <h5 class="text-end"><a href="/products"><i class="fas fa-arrow-left"></i> Continue shopping</a></h5>
-            <h5 class="text-end"><a href="/checkout">Check out <i class="fas fa-arrow-right"></i></a></h5>
+            <div class="me-3">
+                <h3 class="text-end mb-3">Total: AED <%=user.total%>
+                </h3>
+                <h5 class="text-end"><a href="/products"><i class="fas fa-arrow-left"></i> Continue shopping</a>
+                </h5>
+                <h5 class="text-end"><a href="/checkout">Check out <i class="fas fa-arrow-right"></i></a></h5>
+            </div>
         </div>
     </div>
-</div>
-<div class="container-fluid h-100">
-    <div class="row justify-content-center my-5">
-        <div class="col-10 col-md-8">
-            <div class="card shadow">
-                <div class="card-body">
-                    <h2 class="card-title text-center">User profile</h2>
-                    <ul>
-                        <li>Username: <%=user.username%></li>
-                        <li>Email: <%=user.email%></li>
-                        <li>Name: <%=user.name%></li>
-                        <li>Addresses: <%=user.addresses%></li>
-                        <li>Phone: <%=user.phone%></li>
-                        <li>Role: <%=user.role%></li>
-                        <li>Cart: total <%=user.total%>
-                            <ul>
-                                <% for (let item of user.cart) { %> 
-                                <li><%=item.product.name%> - Price: <%=item.product.price%> - Qty: <%=item.qty%></li>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <!-- <form class="d-inline" action="/cart?product=<%=item.product._id%>" method="POST">
-                                            <button class="btn btn-danger">Remove from cart</button>
-                                        </form> -->
-                                    </div>
-                                    <div class="col-6">
-                                        <!-- <form class="d-inline" action="/profile?product=<%=item.product._id%>" method="POST">
-                                            <input type="number" name="qty" id="qty" value="<%=item.qty%>" min="1" max="100">
-                                            <button class="btn btn-info">Update qty</button>
-                                        </form> -->
-                                    </div>
-                                </div>
-                                <% } %> 
-                            </ul>
-                        </li>
-                        <li>Order history: <%=user.orders.length%>
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Cart</th>
-                                        <th scope="col">Total</th>
-                                        <th scope="col">Start</th>
-                                        <th scope="col">End</th>
-                                        <th scope="col">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <% for (let order of user.orders) { %>
-                                    <tr id="<%=order._id%>">
-                                        <td><%=order.cart.length%></td>
-                                        <td><%=order.total%></td>
-                                        <td><%=order.dateStart%></td>
-                                        <td><%=order.dateEnd%></td>
-                                        <td><%=order.status%></td>
-                                    </tr>
-                                    <% } %> 
-                                </tbody>
-                            </table>
-                        </li>
-                    </ul>
-                    <a href="/checkout">Check out</a>
-                </div>
+    <div class="row justify-content-center">
+        <div class="col-10 col-lg-8 cart-card my-5">
+            <div class="text-center">
+                <h6 class="display-6 section-title">Your order history</h6>
+            </div>
+            <div class="accordion my-3">
+                <% user.orders.forEach(function(order, i) { %>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading<%=order._id%>">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse<%=order._id%>" aria-expanded="false"
+                                aria-controls="collapse<%=order._id%>">
+                                Order #<%=i+1%> - <%=moment(order.dateStart).format('Do MMMM, YYYY')%><span class="ms-3 badge bg-info"><%=order.status%></span>
+                            </button>
+                        </h2>
+                        <div id="collapse<%=order._id%>" class="accordion-collapse collapse"
+                            aria-labelledby="heading<%=order._id%>">
+                            <div class="accordion-body">
+                                <p>To be delivered to: <%=`${addresses[i].street}, ${addresses[i].city}`%></p>
+                                <p>Start date: <%=order.dateStart%></p>
+                                <p>End date: <%=order.dateEnd ? order.dateEnd : 'Order in progress'%></p>
+                                <p>Order detail:</p>
+                                <table class="table table-hover text-center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for (let item of order.cart) { %> 
+                                            <tr id="<%=order._id%>">
+                                                <td class="text-capitalize"><a href="/products/<%=item.product._id%>"
+                                                    class="update-btn">
+                                                    <%=item.product.name%></a>
+                                                </td>
+                                                <td><%=item.qty%></td>
+                                                <% if (item.product.discount == 0) { %> 
+                                                    <td>AED <%=item.product.price%> &times; <%=item.qty%></td>
+                                                <% } else { %>
+                                                    <td>
+                                                        <del>AED <%=item.product.price%></del> 
+                                                        AED <%=item.product.discountedPrice%> &times; <%=item.qty%>
+                                                        <span class="badge bg-warning">-<%=item.product.discount%>%</span>
+                                                    </td>
+                                                <% } %>
+                                            </tr>
+                                        <% } %> 
+                                    </tbody>
+                                    <tfoot>
+                                        <td></td>
+                                        <td></td>
+                                        <td><strong>Total: AED <%=order.total%></strong></td>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
             </div>
         </div>
     </div>
