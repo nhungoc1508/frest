@@ -43,7 +43,7 @@ module.exports.renderCart = async (req, res) => {
         }
     });
 
-    res.render('user/profile', { user })
+    res.render('user/cart', { user })
 };
 
 module.exports.updateCart = async (req, res) => {
@@ -63,7 +63,7 @@ module.exports.updateCart = async (req, res) => {
     }
     await user.save();
     req.flash('success', msg);
-    res.redirect('/profile')
+    res.redirect('/cart')
 };
 
 module.exports.renderCheckout = async (req, res) => {
@@ -75,7 +75,7 @@ module.exports.renderCheckout = async (req, res) => {
     });
     if (user.cart.length == 0) {
         req.flash('info', 'You do not have any item in your cart.')
-        res.redirect('/profile')
+        res.redirect('/cart')
     } else {
         res.render('user/checkout', { user })
     }
@@ -109,7 +109,7 @@ module.exports.checkout = async (req, res) => {
         }
         await user.save();
         req.flash('success', 'Successfully placed an order!');
-        res.redirect('/profile')
+        res.redirect('/cart')
     }
 };
 

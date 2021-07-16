@@ -1,0 +1,113 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/cart.css">
+<div class="container-fluid">
+    <div class="row justify-content-center my-5">
+        <div class="col-10 col-lg-8 cart-card">
+            <div class="text-center">
+                <h6 class="display-6 section-title">Your shopping cart</h6>
+            </div>
+            <table class="table align-middle text-center my-3">
+                <thead>
+                    <tr>
+                        <th scope="col" class="col-2">Product</th>
+                        <th scope="col" class="col-4"></th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Update quantity</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let item of user.cart) { %>
+                        <tr>
+                            <td class="text-capitalize"><%=item.product.name%></td>
+                            <td>
+                                <div class="product-img-ctn d-flex">
+                                    <img src="<%=item.product.image.url%>" alt="<%=item.product.name%>" class="img-thumbnail">
+                                </div>
+                            </td>
+                            <td>AED <%=item.product.price%> &times; <%=item.qty%></td>
+                            <td>
+                                <form class="" action="/cart?product=<%=item.product._id%>" method="POST">
+                                    <input type="number" name="qty" id="qty" value="<%=item.qty%>" min="1" max="100">
+                                    <button class="btn update-btn">Update</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form class="d-inline" action="/cart?product=<%=item.product._id%>" method="POST">
+                                    <button class="btn remove-btn">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <h3 class="text-end mb-3">Total: AED <%=user.total%></h3>
+            <h5 class="text-end"><a href="/products"><i class="fas fa-arrow-left"></i> Continue shopping</a></h5>
+            <h5 class="text-end"><a href="/checkout">Check out <i class="fas fa-arrow-right"></i></a></h5>
+        </div>
+    </div>
+</div>
+<div class="container-fluid h-100">
+    <div class="row justify-content-center my-5">
+        <div class="col-10 col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title text-center">User profile</h2>
+                    <ul>
+                        <li>Username: <%=user.username%></li>
+                        <li>Email: <%=user.email%></li>
+                        <li>Name: <%=user.name%></li>
+                        <li>Addresses: <%=user.addresses%></li>
+                        <li>Phone: <%=user.phone%></li>
+                        <li>Role: <%=user.role%></li>
+                        <li>Cart: total <%=user.total%>
+                            <ul>
+                                <% for (let item of user.cart) { %> 
+                                <li><%=item.product.name%> - Price: <%=item.product.price%> - Qty: <%=item.qty%></li>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <!-- <form class="d-inline" action="/cart?product=<%=item.product._id%>" method="POST">
+                                            <button class="btn btn-danger">Remove from cart</button>
+                                        </form> -->
+                                    </div>
+                                    <div class="col-6">
+                                        <!-- <form class="d-inline" action="/profile?product=<%=item.product._id%>" method="POST">
+                                            <input type="number" name="qty" id="qty" value="<%=item.qty%>" min="1" max="100">
+                                            <button class="btn btn-info">Update qty</button>
+                                        </form> -->
+                                    </div>
+                                </div>
+                                <% } %> 
+                            </ul>
+                        </li>
+                        <li>Order history: <%=user.orders.length%>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Cart</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Start</th>
+                                        <th scope="col">End</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for (let order of user.orders) { %>
+                                    <tr id="<%=order._id%>">
+                                        <td><%=order.cart.length%></td>
+                                        <td><%=order.total%></td>
+                                        <td><%=order.dateStart%></td>
+                                        <td><%=order.dateEnd%></td>
+                                        <td><%=order.status%></td>
+                                    </tr>
+                                    <% } %> 
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
+                    <a href="/checkout">Check out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

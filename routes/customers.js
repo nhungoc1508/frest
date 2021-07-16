@@ -16,7 +16,7 @@ router.route('/register')
     .get(isLoggedOut, customers.renderRegister)
     .post(isLoggedOut, catchAsync(customers.register));
 
-router.route('/profile')
+router.route('/cart')
     .get(isLoggedIn, catchAsync(customers.renderCart))
     .post(isLoggedIn, catchAsync(customers.updateCart));
 

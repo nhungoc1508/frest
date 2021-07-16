@@ -36,7 +36,7 @@
                 <% } else { %>
                     <% if (currentUser.role != 'admin') { %>
                         <a class="big-icon" href="/info"><i class="fas fa-user-circle"></i></a>
-                        <a class="big-icon" href="/profile"><i class="fas fa-shopping-cart"></i><span class="position-absolute top-20 start-80 translate-middle badge rounded-pill bg-info"><%=currentUser.cart.length%></span></a>
+                        <a class="big-icon" href="/cart"><i class="fas fa-shopping-cart"></i><span class="position-absolute top-20 start-80 translate-middle badge rounded-pill bg-info"><%=currentUser.cart.length%></span></a>
                     <% } %>
                     <a class="" href="/logout">Log out</a>
                 <% }%>
