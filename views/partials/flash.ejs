@@ -1,23 +1,57 @@
+<link rel="stylesheet" href="/stylesheets/flash.css">
 <% if (success && success.length) { %>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <%= success %>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-            </button>
+    <div aria-live="polite" aria-atomic="true" class="bg-dark position-relative bd-example-toasts">
+        <div class="toast-container position-absolute p-3 top-50 end-0 translate-middle-y" id="toastPlacement">
+            <div class="toast">
+                <div class="toast-header msg-success text-light">
+                    <strong class="me-auto">Success</strong>
+                    <!-- <small>11 mins ago</small> -->
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <%= success %>
+                </div>
+            </div>
+        </div>
     </div>
 <% } %>
 
 <% if (error && error.length) { %>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <%= error %>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-            </button>
+    <div aria-live="polite" aria-atomic="true" class="bg-dark position-relative bd-example-toasts">
+        <div class="toast-container position-absolute p-3 top-50 end-0 translate-middle-y" id="toastPlacement">
+            <div class="toast">
+                <div class="toast-header msg-error text-light">
+                    <strong class="me-auto">Error</strong>
+                    <!-- <small>11 mins ago</small> -->
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <%= error %>
+                </div>
+            </div>
+        </div>
     </div>
 <% } %>
 
 <% if (info && info.length) { %>
-    <div class="alert alert-info alert-dismissible fade show" role="alert">
-        <%= info %>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-            </button>
+    <div aria-live="polite" aria-atomic="true" class="bg-dark position-relative bd-example-toasts">
+        <div class="toast-container position-absolute p-3 top-50 end-0 translate-middle-y" id="toastPlacement">
+            <div class="toast">
+                <div class="toast-header msg-info text-light">
+                    <strong class="me-auto">Information</strong>
+                    <!-- <small>11 mins ago</small> -->
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <%= info %>
+                </div>
+            </div>
+        </div>
     </div>
 <% } %>
+
+<script>
+    $(document).ready(function() {
+        $(".toast").toast('show');
+    });
+</script>

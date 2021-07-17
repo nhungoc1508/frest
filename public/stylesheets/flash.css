@@ -1,0 +1,11 @@
+.msg-success {
+    background-color: #A3DCA7;
+}
+
+.msg-error {
+    background-color: #9c0000;
+}
+
+.msg-info {
+    background-color: #8ad2d8;
+}

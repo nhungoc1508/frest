@@ -51,7 +51,6 @@ module.exports.renderCart = async (req, res) => {
             path: 'product'
         }
     });
-    console.log(user.orders[0])
     // Address hasn't been exported as a schema on its own
     // I'm depending on a roundabout way for now
     const addressIDs = user.orders.map(order => order.address);
