@@ -1,22 +1,62 @@
-<% layout('layouts/boilerplate') %> 
-<h1>Check out</h1>
-<h2>Order:</h2>
-<ul>
-    <% for (let item of user.cart) { %> 
-    <li><%=item.product.name%> - Price: <%=item.product.price%> - Qty: <%=item.qty%></li>
-    <% } %> 
-</ul>
-<h2>Total: <%=user.total%></h2>
-<h2>Information:</h2>
-<p>Address(es):</p>
-<form action="/checkout" method="POST">
-    <% user.addresses.forEach((add, i) => { %>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="address" id="<%=add._id%>" value="<%=add._id%>" <%= i===0 ? 'checked' : ''%>>
-        <label class="form-check-label" for="address">
-            <%=add.street%>, <%=add.city%>
-        </label>
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/checkout.css">
+<div class="container-fluid">
+    <div class="row justify-content-center my-5">
+        <div class="col-10 col-lg-8 checkout-card">
+            <div class="text-center">
+                <h6 class="display-6 section-title">Check out</h6>
+            </div>
+            <div class="section-content">
+                <h4>Order detail</h4>
+                <table class="table table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (let item of user.cart) { %> 
+                            <tr>
+                                <td class="text-capitalize"><a href="/products/<%=item.product._id%>"
+                                    class="update-btn">
+                                    <%=item.product.name%></a>
+                                </td>
+                                <td><%=item.qty%></td>
+                                <% if (item.product.discount == 0) { %> 
+                                    <td>AED <%=item.product.price%> &times; <%=item.qty%></td>
+                                <% } else { %>
+                                    <td>
+                                        <del>AED <%=item.product.price%></del> 
+                                        AED <%=item.product.discountedPrice%> &times; <%=item.qty%>
+                                        <span class="badge bg-warning">-<%=item.product.discount%>%</span>
+                                    </td>
+                                <% } %>
+                            </tr>
+                        <% } %> 
+                    </tbody>
+                </table>
+            </div>
+            <div class="section-content">
+                <h4>Total: AED <%=user.total%></h4>
+            </div>
+            <div class="section-content">
+                <h4>Select delivery address</h4>
+                <form action="/checkout" method="POST" class="my-3">
+                    <% user.addresses.forEach((add, i) => { %>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="address" id="<%=add._id%>" value="<%=add._id%>" <%= i===0 ? 'checked' : ''%>>
+                        <label class="form-check-label" for="<%=add._id%>">
+                            <%=add.street%>, <%=add.city%>
+                        </label>
+                    </div>
+                    <% }) %>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn custom-btn mt-3">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <% }) %>
-    <button class="btn btn-info">Submit</button>
-</form>
+</div>
