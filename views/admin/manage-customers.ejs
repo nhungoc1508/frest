@@ -1,22 +1,27 @@
-<% layout('layouts/boilerplate') %>
-<h1>Manage customers</h1>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Spent</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% for (let customer of customers) { %>
-        <tr id="<%=customer._id%>">
-            <td><%=customer.username%></td>
-            <td><%=customer.email%></td>
-            <td><%=customer.phone%></td>
-            <td><%=customer.totalSpent%></td>
-        </tr>
-        <% } %> 
-    </tbody>
-</table>
+<% layout('layouts/admin') %>
+<link rel="stylesheet" href="/stylesheets/admin.css">
+<div class="w-100 container-fluid d-flex flex-column banner text-center mt-5 mb-3" id="customer-banner">
+    <h3 class="lead">MANAGE CUSTOMERS</h3>
+</div>
+<div class="container py-3">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Spent</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let customer of customers) { %>
+            <tr id="<%=customer._id%>">
+                <td><%=customer.username%></td>
+                <td><%=customer.email%></td>
+                <td><%=customer.phone%></td>
+                <td><%=customer.totalSpent%></td>
+            </tr>
+            <% } %> 
+        </tbody>
+    </table>
+</div>

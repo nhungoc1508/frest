@@ -1,0 +1,41 @@
+.banner {
+    color: white;
+    padding: 30px 0px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#product-banner {
+    background-image: linear-gradient(to left, rgb(47, 72, 88, 0.8), rgb(117, 191, 162, 0.8)), url('https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2767&q=80');
+}
+
+#customer-banner {
+    background-image: linear-gradient(to left, rgb(47, 72, 88, 0.8), rgb(117, 191, 162, 0.8)), url('https://images.unsplash.com/photo-1622791072171-c2e963027aea?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80');
+}
+
+#order-banner {
+    background-image: linear-gradient(to left, rgb(47, 72, 88, 0.8), rgb(117, 191, 162, 0.8)), url('https://images.unsplash.com/photo-1527904324834-3bda86da6771?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2793&q=80');
+}
+
+.form-control {
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid black;
+    border-radius: 0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.nav-tabs .nav-link {
+    background-color: #2F4858;
+    color: white;
+    border: 1px solid white;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+.nav-tabs .btn {
+    border-radius: 0;
+}
