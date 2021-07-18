@@ -73,7 +73,7 @@ module.exports.deleteProduct = async (req, res) => {
 module.exports.renderEditProduct = async (req, res) => {
     const { id } = req.params;
     const product = await Product.findById(id);
-    console.log(product.image.filename == null)
+    // console.log(product.image.filename == null)
     res.render('product/edit', { product })
 };
 
