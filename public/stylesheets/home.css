@@ -102,3 +102,64 @@ div.scroll-menu {
     overflow: auto;
     white-space: nowrap;
 }
+
+#about-banner {
+    background-image: linear-gradient(to left, rgb(47, 72, 88, 0.8), rgb(117, 191, 162, 0.8)), url('https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80');
+}
+
+#left-section-about, #left-section-contact {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#left-section-about {
+    background-image: url('https://images.unsplash.com/photo-1584799580661-53b7c6b99430?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2900&q=80');
+}
+
+#left-section-contact {
+    background-image: url('https://images.unsplash.com/photo-1557333610-90ee4a951ecf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80');
+}
+
+#right-section-about, #right-section-contact {
+    min-height: 90vh;
+}
+
+.info-card {
+    background-color: rgba(255, 255, 255, 0.8);
+    min-height: 80%;
+}
+
+@media (max-width: 768px) {
+    #right-section-about, #right-section-contact {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 90vh;
+    }
+
+    #right-section-about {
+        background-image: url('https://images.unsplash.com/photo-1584799580661-53b7c6b99430?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2900&q=80');
+    }
+
+    #right-section-contact {
+        background-image: url('https://images.unsplash.com/photo-1557333610-90ee4a951ecf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80');
+    }
+
+    #left-section-about, #left-section-contact {
+        max-height: 0px;
+    }
+
+    .info-card {
+        box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.25);
+    }
+}
+
+.form-control {
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid black;
+    border-radius: 0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
